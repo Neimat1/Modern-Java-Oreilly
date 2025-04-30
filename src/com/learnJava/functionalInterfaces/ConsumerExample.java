@@ -28,7 +28,6 @@ public class ConsumerExample {
     static List<Student> studentList = StudentDataBase.getAllStudents();
 
 
-
     public static void printName() {
         System.out.println("\nPrinting student names:- ");
         studentList.forEach(consumerPrintingName);
@@ -46,6 +45,17 @@ public class ConsumerExample {
         studentList.forEach(student -> {
             if (student.getGpa() > 3.0)
                 consumerPrintingName.andThen(consumerPrintingActivities).accept(student);
+            /**
+             * why we use accept method here? and not in line 39
+             * The accept method is explicitly used in line 48 because the andThen method returns a new Consumer
+             * that chains the two consumers (consumerPrintingName and consumerPrintingActivities).
+             * To execute this chained consumer for a specific student,
+             * you need to call accept on it, passing the student as the argument.
+             *
+             * In line 39, accept is not explicitly called because
+             * forEach automatically invokes the accept method of the Consumer for each element in the studentList.
+             * Therefore, the accept method is implicitly used by forEach.
+             */
 
         });
     }
