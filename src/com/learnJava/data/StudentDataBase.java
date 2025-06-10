@@ -2,8 +2,12 @@ package com.learnJava.data;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class StudentDataBase {
+
+    public static Supplier<Student> studentSupplier = () ->
+            new Student("Nemo", 2, 3, "female", List.of("Reading", "Maths"));
 
     /**
      * Total of 6 students in the database
